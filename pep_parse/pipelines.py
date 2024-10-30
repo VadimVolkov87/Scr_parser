@@ -33,4 +33,4 @@ class PepParsePipeline:
                            ('Статус', 'Количество'),
                            *self.results.items(),
                            ('Итого', sum(self.results.values())),
-                        ))
+                       ))
