@@ -2,10 +2,9 @@
 import csv
 import datetime as dt
 from collections import defaultdict
-from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-RESULTS = 'results'
+from pep_parse.settings import BASE_DIR, RESULTS
+
 DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
 
 
@@ -23,12 +22,15 @@ class PepParsePipeline:
 
     def close_spider(self, spider):
         """Функция записи результатов в файл."""
-        results_dir = BASE_DIR / RESULTS
         now_formatted = dt.datetime.now().strftime(DATETIME_FORMAT)
         file_name = f'status_summary_{now_formatted}.csv'
-        file_path = results_dir / file_name
+        file_path = BASE_DIR / RESULTS / file_name
         with open(file_path, 'w', encoding='utf-8') as f:
-            csv.writer(f, dialect=csv.unix_dialect, quoting=csv.QUOTE_NONE
-                       ).writerows((('Статус', 'Количество'),
-                                   *self.results.items(),
-                                   ('Итого', sum(self.results.values())), ))
+            csv.writer(f,
+                       dialect=csv.unix_dialect,
+                       quoting=csv.QUOTE_NONE
+                       ).writerows((
+                           ('Статус', 'Количество'),
+                           *self.results.items(),
+                           ('Итого', sum(self.results.values())),
+                        ))
