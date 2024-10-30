@@ -32,5 +32,5 @@ class PepParsePipeline:
             csv.writer(f, dialect=csv.unix_dialect).writerows(
                 [('Статус', 'Количество'),
                  *self.results.items(),
-                 ('Итого', sum(self.results.values())),]
+                 ('Итого', sum(self.results.values())), ]
             )

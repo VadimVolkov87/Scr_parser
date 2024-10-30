@@ -20,8 +20,8 @@ class PepSpider(scrapy.Spider):
     def parse_pep(self, response):
         """Функция для парсинга страниц Pep."""
         number_name = ' '.join(t.strip() for t in response.css(
-                    'h1.page-title::text'
-                    ).getall()).strip().split(' – ')
+            'h1.page-title::text'
+        ).getall()).strip().split(' – ')
         data = {
             'number': number_name[0].split()[1],
             'name': number_name[1],
