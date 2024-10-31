@@ -2,6 +2,10 @@
 import scrapy
 
 from pep_parse.items import PepParseItem
+from pep_parse.settings import BASE_DIR, RESULTS
+
+results_dir = BASE_DIR / RESULTS
+results_dir.mkdir(exist_ok=True)
 
 
 class PepSpider(scrapy.Spider):
@@ -9,7 +13,7 @@ class PepSpider(scrapy.Spider):
 
     name = 'pep'
     allowed_domains = ['peps.python.org']
-    start_urls = [f'https://{allowed_domains[0]}/']
+    start_urls = [f'https://{domain}/' for domain in allowed_domains]
 
     def parse(self, response):
         """Функция парсинга ссылок на страницы Pep."""
@@ -22,7 +26,7 @@ class PepSpider(scrapy.Spider):
             'h1.page-title::text'
         ).getall()).strip().split(' – ')
         yield PepParseItem(
-            dict(number=number_names[0].split()[1],
+                 number=number_names[0].split()[1],
                  name=number_names[1],
-                 status=response.css('dl dd abbr::text').get(), )
+                 status=response.css('dl dd abbr::text').get(),
         )
