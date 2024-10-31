@@ -38,7 +38,7 @@ class PepParsePipeline:
                 dialect=csv.unix_dialect,
                 quoting=csv.QUOTE_NONE
             ).writerows((
-             ('Статус', 'Количество'),
-             *self.results.items(),
-             ('Итого', sum(self.results.values())),
+              ('Статус', 'Количество'),
+              *self.results.items(),
+              ('Итого', sum(self.results.values())),
             ))
