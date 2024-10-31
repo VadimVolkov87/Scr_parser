@@ -13,6 +13,8 @@ class PepParsePipeline:
 
     def open_spider(self, spider):
         """Функция создания словаря для результатов."""
+        results_dir = BASE_DIR / RESULTS
+        results_dir.mkdir(exist_ok=True)
         self.results = defaultdict(int)
 
     def process_item(self, item, spider):

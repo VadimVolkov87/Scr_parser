@@ -2,10 +2,6 @@
 import scrapy
 
 from pep_parse.items import PepParseItem
-from pep_parse.settings import BASE_DIR, RESULTS
-
-results_dir = BASE_DIR / RESULTS
-results_dir.mkdir(exist_ok=True)
 
 
 class PepSpider(scrapy.Spider):
