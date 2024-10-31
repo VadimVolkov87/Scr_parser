@@ -26,7 +26,7 @@ class PepSpider(scrapy.Spider):
             'h1.page-title::text'
         ).getall()).strip().split(' – ')
         yield PepParseItem(
-                 number=number_names[0].split()[1],
-                 name=number_names[1],
-                 status=response.css('dl dd abbr::text').get(),
+            number=number_names[0].split()[1],
+            name=number_names[1],
+            status=response.css('dl dd abbr::text').get(),
         )
